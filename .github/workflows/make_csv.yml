@@ -1,0 +1,43 @@
+name: Make CSV
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+
+env:
+  PYTHON_VERSION: '3.8'
+
+jobs:
+  make-csv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # pip install
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install pip dependencies
+        run: pip install -r requirements.txt
+
+      - name: Make CSV
+        run: |
+          python make_csv.py
+          git add data/freelance-start/
+
+      - name: Commit and Push
+        run: |
+          git branch
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Make CSV"
+          git push origin HEAD
