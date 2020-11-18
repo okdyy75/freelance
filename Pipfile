@@ -1,0 +1,15 @@
+[[source]]
+url = "https://github.com/okdyy75/freelance.git"
+verify_ssl = true
+name = "freelance"
+
+[scripts]
+start = "python3 app.py runserver"
+make_csv = "python3 make_csv.py"
+
+[packages]
+chromedriver-binary = "~=86.0"
+selenium = "~=3.141"
+
+[requires]
+python_version = "3.8"
