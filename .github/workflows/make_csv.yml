@@ -2,7 +2,7 @@ name: Make CSV
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 0 * * *'
 
 env:
   PYTHON_VERSION: '3.8'
