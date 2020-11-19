@@ -3,15 +3,9 @@
 
 ## フリーランス案件サイト
 
-レバテックフリーランス
+レバテックフリーランス  
 https://freelance.levtech.jp
 
-フリーランススタート
+フリーランススタート  
 https://freelance-start.com
-
-PE-BANK
-https://pe-bank.jp/
-
-クラウドテック
-https://crowdtech.jp/
 
