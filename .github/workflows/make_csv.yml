@@ -32,7 +32,7 @@ jobs:
       - name: Make CSV
         run: |
           python make_csv.py
-          git add data/freelance-start/
+          git add data/
 
       - name: Commit and Push
         run: |
