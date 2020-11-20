@@ -12,6 +12,7 @@ import chromedriver_binary
 """
 共通変数・定数設定
 """
+DATA_PATH = 'data'
 CSV_HEADER = [
     'skill', 'count', 'avg_price', 'med_price', 'max_price', 'min_price', 'created_at'
 ]
@@ -28,7 +29,7 @@ def main() -> None:
     driver = Chrome(options=options)
 
     # フリーランススタートからスキル別の案件集計CSV作成
-    make_freelance_start(driver)
+    # make_freelance_start(driver)
 
     # レバテックからスキル別の案件集計CSV作成
     make_levtech(driver)
@@ -66,7 +67,7 @@ def make_freelance_start(driver: Chrome) -> None:
         max_price = re.search(r'最高単価([\d\.]+)万円', text).group(1)
         min_price = re.search(r'最低単価([\d\.]+)万円', text).group(1)
 
-        filepath = './data/freelance-start/' + skill.replace(' ', '').replace('/', '／') + '.csv'
+        filepath = DATA_PATH + '/freelance-start/' + skill.replace(' ', '').replace('/', '／') + '.csv'
 
         # CSV作成・追加書き込み
         if not os.path.exists(filepath):
@@ -91,28 +92,46 @@ def make_levtech(driver: Chrome) -> None:
     driver.find_elements_by_css_selector('.conditionGroup__btn')[1].click()
 
     # 各タブのチェックボックス数取得
+    categories = {
+        'lang': {
+            'idx': 0
+        },
+        'fw': {
+            'idx': 1
+        },
+        'db': {
+            'idx': 2
+        },
+        'os': {
+            'idx': 3
+        },
+        'cloud': {
+            'idx': 4
+        }
+    }
+
     # 左タブの「言語」
-    driver.find_elements_by_css_selector('.modalCategory__item')[0].click()
-    lang_count = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['lang']['idx']].click()
+    categories['lang']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「フレームワーク」
-    driver.find_elements_by_css_selector('.modalCategory__item')[1].click()
-    fw_count = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['fw']['idx']].click()
+    categories['fw']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「DB」
-    driver.find_elements_by_css_selector('.modalCategory__item')[2].click()
-    db_count = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['db']['idx']].click()
+    categories['db']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「OS」
-    driver.find_elements_by_css_selector('.modalCategory__item')[3].click()
-    os_count = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['os']['idx']].click()
+    categories['os']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
-    # 左タブの「OS」
-    driver.find_elements_by_css_selector('.modalCategory__item')[4].click()
-    cloud_count = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    # 左タブの「Cloud」
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['cloud']['idx']].click()
+    categories['cloud']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
-    for c in [lang_count, fw_count, db_count, os_count, cloud_count]:
-        for i in range(c - 1):
+    for category_key, category in categories.items():
+        for i in range(category['count'] - 1):
             # 検索ページ表示
             time.sleep(1)  # クロールするので連続リクエストは控える
             driver.get('https://freelance.levtech.jp/project/search/')
@@ -144,7 +163,7 @@ def make_levtech(driver: Chrome) -> None:
             max_price = re.search(r'最高単価(\d+)万円', text).group(1)
             min_price = re.search(r'最低単価(\d+)万円', text).group(1)
 
-            filepath = './data/levtech/' + skill.replace(' ', '').replace('/', '／') + '.csv'
+            filepath = DATA_PATH + '/levtech/' + category_key + '/' + skill.replace(' ', '').replace('/', '／') + '.csv'
 
             # CSV作成・追加書き込み
             if not os.path.exists(filepath):
