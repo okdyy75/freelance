@@ -9,7 +9,7 @@ import pandas as pd
 """
 def main() -> None:
 
-    files = glob.glob('../data/freelance-start/*.csv')
+    files = glob.glob('data/freelance-start/*.csv')
 
     list = []
     for file in files:
@@ -20,7 +20,7 @@ def main() -> None:
         list.append(df.loc[[20201119]])
 
     df = pd.concat(list, sort=False)
-    df.to_csv('../data/freelance-start/all.csv')
+    df.to_csv('data/freelance-start/all.csv')
 
 
 if __name__ == "__main__":
