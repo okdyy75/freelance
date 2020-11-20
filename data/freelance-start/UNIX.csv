@@ -1,2 +1,3 @@
 skill,count,avg_price,med_price,max_price,min_price,created_at
 UNIX,275,58.9,59,135,30,20201119
+UNIX,275,58.9,59,135,30,20201120
