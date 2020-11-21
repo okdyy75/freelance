@@ -13,9 +13,6 @@ import chromedriver_binary
 共通変数・定数設定
 """
 DATA_PATH = 'data'
-CSV_HEADER = [
-    'skill', 'count', 'avg_price', 'med_price', 'max_price', 'min_price', 'created_at'
-]
 now = datetime.datetime.today()
 
 """
@@ -29,7 +26,7 @@ def main() -> None:
     driver = Chrome(options=options)
 
     # フリーランススタートからスキル別の案件集計CSV作成
-    # make_freelance_start(driver)
+    make_freelance_start(driver)
 
     # レバテックからスキル別の案件集計CSV作成
     make_levtech(driver)
@@ -73,7 +70,9 @@ def make_freelance_start(driver: Chrome) -> None:
         if not os.path.exists(filepath):
             with open(filepath, 'w') as f:
                 writer = csv.writer(f)
-                writer.writerow(CSV_HEADER)
+                writer.writerow([
+                    'skill', 'count', 'avg_price', 'med_price', 'max_price', 'min_price', 'created_at'
+                ])
 
         with open(filepath, 'a') as f:
             writer = csv.writer(f)
@@ -169,11 +168,13 @@ def make_levtech(driver: Chrome) -> None:
             if not os.path.exists(filepath):
                 with open(filepath, 'w') as f:
                     writer = csv.writer(f)
-                    writer.writerow(CSV_HEADER)
+                    writer.writerow([
+                        'skill', 'count', 'avg_price', 'max_price', 'min_price', 'created_at'
+                    ])
 
             with open(filepath, 'a') as f:
                 writer = csv.writer(f)
-                writer.writerow([skill, count, avg_price, '', max_price, min_price, now.strftime("%Y%m%d")])
+                writer.writerow([skill, count, avg_price, max_price, min_price, now.strftime("%Y%m%d")])
 
 
 if __name__ == "__main__":

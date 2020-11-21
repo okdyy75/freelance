@@ -31,7 +31,7 @@ jobs:
 
       - name: Make CSV
         run: |
-          python make_csv.py
+          python app/make_csv.py
           git add data/
 
       - name: Commit and Push
