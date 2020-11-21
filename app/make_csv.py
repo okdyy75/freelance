@@ -4,6 +4,7 @@ import datetime
 import os
 import re
 import time
+import threading
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,25 +20,32 @@ now = datetime.datetime.today()
  メイン処理
 """
 def main() -> None:
+
+    # フリーランススタートからスキル別の案件集計CSV作成
+    thread1 = threading.Thread(target=make_freelance_start)
+
+    # レバテックからスキル別の案件集計CSV作成
+    thread2 = threading.Thread(target=make_levtech)
+
+    thread1.start()
+    thread2.start()
+    thread1.join()
+    thread2.join()
+
+    print('処理が終了しました')
+
+
+"""
+ フリーランススタートからスキル別の案件集計CSV作成
+"""
+def make_freelance_start() -> None:
+
     # selenium Chrome設定
     options = ChromeOptions()
     options.add_argument('--headless')
     options.page_load_strategy = 'normal'
     driver = Chrome(options=options)
 
-    # フリーランススタートからスキル別の案件集計CSV作成
-    make_freelance_start(driver)
-
-    # レバテックからスキル別の案件集計CSV作成
-    make_levtech(driver)
-
-    driver.quit()
-
-
-"""
- フリーランススタートからスキル別の案件集計CSV作成
-"""
-def make_freelance_start(driver: Chrome) -> None:
     # スキル一覧を取得
     driver.get('https://freelance-start.com')
     urls = [i.get_attribute('href') for i in driver.find_elements_by_css_selector('.item-skill a')]
@@ -78,11 +86,19 @@ def make_freelance_start(driver: Chrome) -> None:
             writer = csv.writer(f)
             writer.writerow([skill, count, avg_price, med_price, max_price, min_price, now.strftime("%Y%m%d")])
 
+    driver.quit()
+
 
 """
  レバテックからスキル別の案件集計CSV作成
 """
-def make_levtech(driver: Chrome) -> None:
+def make_levtech() -> None:
+
+    # selenium Chrome設定
+    options = ChromeOptions()
+    options.add_argument('--headless')
+    options.page_load_strategy = 'normal'
+    driver = Chrome(options=options)
 
     # 検索ページからスキル一覧を取得
     driver.get('https://freelance.levtech.jp/project/search/')
@@ -139,7 +155,7 @@ def make_levtech(driver: Chrome) -> None:
             driver.find_elements_by_css_selector('.conditionGroup__btn')[1].click()
 
             # 左タブの「言語」
-            driver.find_elements_by_css_selector('.modalCategory__item')[0].click()
+            driver.find_elements_by_css_selector('.modalCategory__item')[category['idx']].click()
 
             # 「言語」選択
             driver.find_elements_by_css_selector('.modalCategoryDetail__item')[i].click()
@@ -175,6 +191,8 @@ def make_levtech(driver: Chrome) -> None:
             with open(filepath, 'a') as f:
                 writer = csv.writer(f)
                 writer.writerow([skill, count, avg_price, max_price, min_price, now.strftime("%Y%m%d")])
+
+    driver.quit()
 
 
 if __name__ == "__main__":
