@@ -21,7 +21,6 @@ now = datetime.datetime.today()
 def main() -> None:
 
     filter_date = now.strftime("%Y%m%d")
-    filter_date = 20201121
 
     # レバテックのスキル別案件集計CSVをマージする
     # カテゴリ別で集計
