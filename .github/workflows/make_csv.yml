@@ -1,6 +1,8 @@
 name: Make CSV
 
-on: push
+on:
+  schedule:
+    - cron: '0 0 * * *'
 
 env:
   PYTHON_VERSION: '3.8'
