@@ -6,7 +6,7 @@ name = "pypi"
 [scripts]
 start = "python3 app/app.py runserver"
 make_csv = "python3 app/make_csv.py"
-merge_csv = "python3 app/make_merge_csv.py"
+make_merge_csv = "python3 app/make_merge_csv.py"
 print_graph = "python3 app/print_graph.py"
 
 [requires]
