@@ -108,42 +108,42 @@ def make_levtech() -> None:
 
     # 各タブのチェックボックス数取得
     categories = {
-        'lang': {
+        'Language': {
             'idx': 0
         },
-        'fw': {
+        'FrameWork': {
             'idx': 1
         },
-        'db': {
+        'DB': {
             'idx': 2
         },
-        'os': {
+        'OS': {
             'idx': 3
         },
-        'cloud': {
+        'Cloud': {
             'idx': 4
         }
     }
 
     # 左タブの「言語」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['lang']['idx']].click()
-    categories['lang']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['Language']['idx']].click()
+    categories['Language']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「フレームワーク」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['fw']['idx']].click()
-    categories['fw']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['FrameWork']['idx']].click()
+    categories['FrameWork']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「DB」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['db']['idx']].click()
-    categories['db']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['DB']['idx']].click()
+    categories['DB']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「OS」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['os']['idx']].click()
-    categories['os']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['OS']['idx']].click()
+    categories['OS']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「Cloud」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['cloud']['idx']].click()
-    categories['cloud']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['Cloud']['idx']].click()
+    categories['Cloud']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     for category_key, category in categories.items():
         for i in range(category['count'] - 1):
