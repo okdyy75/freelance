@@ -33,7 +33,7 @@ def main() -> None:
                 continue
 
             df = pd.read_csv(file, index_col='created_at')
-            list.append(df.loc[[filter_date]])
+            list.append(df.loc[[int(filter_date)]])
 
         df = pd.concat(list, sort=False)
         df.to_csv(DATA_PATH + '/levtech/' + putfile)
@@ -47,7 +47,7 @@ def main() -> None:
             continue
 
         df = pd.read_csv(file, index_col='created_at')
-        list.append(df.loc[[filter_date]])
+        list.append(df.loc[[int(filter_date)]])
 
     df = pd.concat(list, sort=False)
     df.to_csv(DATA_PATH + '/' + putfile)
@@ -62,7 +62,7 @@ def main() -> None:
             continue
 
         df = pd.read_csv(file, index_col='created_at')
-        list.append(df.loc[[filter_date]])
+        list.append(df.loc[[int(filter_date)]])
 
     df = pd.concat(list, sort=False)
     df.to_csv(DATA_PATH + '/' + putfile)
