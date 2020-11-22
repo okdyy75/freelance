@@ -1,2 +1,3 @@
 skill,count,avg_price,max_price,min_price,created_at
 DynamoDB,69,81,95,60,20201121
+DynamoDB,69,81,95,60,20201122
