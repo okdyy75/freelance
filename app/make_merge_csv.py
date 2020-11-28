@@ -8,7 +8,7 @@ import pandas as pd
 DATA_PATH = 'data'
 CATEGORIES = {
     'Language',
-    'FrameWork',
+    'Framework',
     'DB',
     'OS',
     'Cloud'

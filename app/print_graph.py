@@ -11,7 +11,7 @@ DATA_PATH = 'data'
 now = datetime.datetime.today()
 CATEGORIES = {
     'Language',
-    'FrameWork',
+    'Framework',
     'DB',
     'OS',
     'Cloud'

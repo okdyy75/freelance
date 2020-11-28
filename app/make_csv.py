@@ -111,7 +111,7 @@ def make_levtech() -> None:
         'Language': {
             'idx': 0
         },
-        'FrameWork': {
+        'Framework': {
             'idx': 1
         },
         'DB': {
@@ -130,8 +130,8 @@ def make_levtech() -> None:
     categories['Language']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「フレームワーク」
-    driver.find_elements_by_css_selector('.modalCategory__item')[categories['FrameWork']['idx']].click()
-    categories['FrameWork']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
+    driver.find_elements_by_css_selector('.modalCategory__item')[categories['Framework']['idx']].click()
+    categories['Framework']['count'] = len(driver.find_elements_by_css_selector('.modalCategoryDetail__item'))
 
     # 左タブの「DB」
     driver.find_elements_by_css_selector('.modalCategory__item')[categories['DB']['idx']].click()
