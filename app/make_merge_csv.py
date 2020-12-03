@@ -22,8 +22,8 @@ def main() -> None:
 
     filter_date = now.strftime("%Y%m%d")
 
-    # レバテックのスキル別案件集計CSVをマージする
-    # カテゴリ別で集計
+    """ レバテック """
+    # スキル別案件集計CSVをマージする(カテゴリ別)
     for category_key in CATEGORIES:
         files = glob.glob(DATA_PATH + '/levtech/' + category_key + '/*.csv')
         putfile = category_key + '.csv'
@@ -38,7 +38,7 @@ def main() -> None:
         df = pd.concat(list, sort=False)
         df.to_csv(DATA_PATH + '/levtech/' + putfile)
 
-    # 全体集計
+    # スキル別案件集計CSVをマージする(全体)
     files = glob.glob(DATA_PATH + '/levtech/*.csv')
     putfile = 'levtech.csv'
     list = []
@@ -52,8 +52,8 @@ def main() -> None:
     df = pd.concat(list, sort=False)
     df.to_csv(DATA_PATH + '/' + putfile)
 
-    # フリーランススタートのスキル別案件集計CSVをマージする
-    # 全体集計
+    """ フリーランススタート """
+    # スキル別案件集計CSVをマージする(全体)
     files = glob.glob(DATA_PATH + '/freelance-start/*.csv')
     putfile = 'freelance-start.csv'
     list = []
