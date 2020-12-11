@@ -42,16 +42,16 @@ jobs:
           git commit -am "Make CSV"
           git push origin HEAD
 
-      - name: Export Graph
-        run: |
-          python app/make_merge_csv.py
-          python app/print_graph.py
-          git add data/
+      # - name: Export Graph
+      #   run: |
+      #     python app/make_merge_csv.py
+      #     python app/print_graph.py
+      #     git add data/
 
-      - name: Commit and Push
-        run: |
-          git branch
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Export Graph"
-          git push origin HEAD
+      # - name: Commit and Push
+      #   run: |
+      #     git branch
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      #     git commit -am "Export Graph"
+      #     git push origin HEAD
