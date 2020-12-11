@@ -1,8 +1,11 @@
+const _ = require(`lodash`)
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    lang: `ja`,
+    title: `プログラミング言語別単価チャート`,
+    description: `プログラミング言語別に単価を集計＆グラフ化したサイトです。`,
+    author: `@okdyy75`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -13,22 +16,36 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `levtech`,
+        path: `../data/levtech/`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-csv`,
+      options: {
+        typeName: ({ node }) =>
+          _.upperFirst(_.camelCase(`${node.sourceInstanceName} ${node.relativeDirectory} ${node.extension}`)),
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `GatsbyJS`,
+        short_name: `GatsbyJS`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    "gatsby-plugin-theme-ui",
   ],
 }

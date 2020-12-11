@@ -1,6 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+const _ = require("lodash")
 
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
@@ -13,10 +14,23 @@ import Img from "gatsby-image"
  * - `useStaticQuery`: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-const Image = () => {
+type Props = {
+  path: string
+  width: Number | string
+  height: Number | string
+}
+
+const Image = ({ path, width, height }: Props) => {
   const data = useStaticQuery(graphql`
-    query {
-      placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+    {
+      gatsbyIcon: file(relativePath: { eq: "gatsby-icon.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      notFound: file(relativePath: { eq: "not-found.png" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
             ...GatsbyImageSharpFluid
@@ -25,12 +39,13 @@ const Image = () => {
       }
     }
   `)
-
-  if (!data?.placeholderImage?.childImageSharp?.fluid) {
+  const images = [data.gatsbyIcon.childImageSharp, data.notFound.childImageSharp]
+  const image = _.find(images, (v, k) => v.fluid.src.indexOf(path) !== -1)
+  if (!image) {
     return <div>Picture not found</div>
   }
 
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+  return <Img fluid={image.fluid} fadeIn={false} style={{ width: width, height: height }} />
 }
 
 export default Image
