@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{XEJ8:function(e,t,n){"use strict";n.r(t);var a=n("q1tI"),r=n.n(a),c=n("N5vR"),l=n("vrFN"),o=n("xkEo");t.default=function(e){var t=e.pageContext.site;return r.a.createElement(c.a,null,t,r.a.createElement(l.a,{title:t}),"Levtech"===t&&r.a.createElement(o.a,null))}}}]);
-//# sourceMappingURL=component---src-templates-site-tsx-ad6b893114a85556baaa.js.map
