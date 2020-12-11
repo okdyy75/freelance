@@ -1,6 +1,7 @@
 const _ = require(`lodash`)
 
 module.exports = {
+  pathPrefix: "/freelance-chart",
   siteMetadata: {
     lang: `ja`,
     title: `プログラミング言語別単価チャート`,
