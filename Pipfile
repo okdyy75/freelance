@@ -10,7 +10,7 @@ make_merge_csv = "python3 app/make_merge_csv.py"
 print_graph = "python3 app/print_graph.py"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
 
 [packages]
 chromedriver-binary = "~=86.0"
