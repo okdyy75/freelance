@@ -1,7 +1,11 @@
 const _ = require(`lodash`)
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
-  pathPrefix: "/freelance-chart",
+  pathPrefix: process.env.PATH_PREFIX,
   siteMetadata: {
     lang: `ja`,
     title: `プログラミング言語別単価チャート`,
