@@ -1,5 +1,6 @@
-import React from "react"
-import { Heading, Text } from "theme-ui"
+/** @jsx jsx */
+import { jsx, Heading, Text } from "theme-ui"
+import { Link } from "gatsby"
 
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
@@ -14,7 +15,9 @@ const IndexPage = () => (
     <Text variant="p">
       このサイトはIT系フリーランスサイトから、プログラミング言語の単価を集計＆グラフ化したサイトです。
       <br />
-      現在はレバテックフリーランスからのみ集計しています。
+      現在は
+      <Link to="https://freelance.levtech.jp" target={`_blank`}>レバテックフリーランス</Link>
+      からのみ集計しています。
     </Text>
     <Levtech />
   </Layout>

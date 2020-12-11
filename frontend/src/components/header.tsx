@@ -20,7 +20,7 @@ const Header = ({ siteTitle = `` }: { siteTitle: string }) => (
     </h1>
     <div sx={{ mx: "auto" }} />
     <Link
-      to="https://github.com/okdyy75/freelance"
+      to="https://github.com/okdyy75/freelance-chart"
       sx={{
         variant: "styles.navlink",
       }}
