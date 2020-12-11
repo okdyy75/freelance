@@ -29,7 +29,6 @@ function SEO({ description, lang, meta, title }) {
   const metaLang = lang || site.siteMetadata.lang
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-  console.log(metaLang)
 
   return (
     <Helmet
