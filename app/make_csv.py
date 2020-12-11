@@ -40,6 +40,101 @@ def main() -> None:
 """
 def make_freelance_start() -> None:
 
+    categories_skills = {
+        'etc': [
+            'Abstract',
+            'Cisco',
+            'CodeDeploy',
+            'CodePipeline',
+            'SAP',
+        ],
+        'design': [
+            'Adobe XD',
+            'After Effects',
+            'Illustrator',
+            'Maya',
+            'Photoshop',
+        ],
+        'Infrastructure': [
+            'AWS',
+            'Azure',
+            'Fargate',
+            'Google Cloud Platform',
+            'Kubernetes',
+            'Linux',
+            'Oracle',
+            'UNIX',
+            'WindowsServer',
+        ],
+        'Framework': [
+            'AngularJS',
+            'Backbone.js',
+            'CakePHP',
+            'Catalyst',
+            'CodeIgniter',
+            'Django',
+            'Ember.js',
+            'Ethna',
+            'Flask',
+            'Flutter',
+            'FuelPHP',
+            'Knockout.js',
+            'Laravel',
+            'Node.js',
+            'NuxtJS',
+            'Phalcon',
+            'Pyramid',
+            'React',
+            'ReactNative',
+            'RSpec',
+            'Ruby on Rails',
+            'SAStruts',
+            'Seasar2',
+            'Slim',
+            'Spark',
+            'Spring',
+            'SpringBoot',
+            'Struts',
+            'Symfony',
+            'Tornado',
+            'Vue.js',
+            'Yii',
+            'Zend Framework',
+        ],
+        'Language': [
+            'Apex',
+            'ASP.NET',
+            'C#.NET',
+            'C#',
+            'C++',
+            'COBOL',
+            'Cocos2d-x',
+            'C言語',
+            'Go言語',
+            'HTML5',
+            'Java',
+            'JavaScript',
+            'Kotlin',
+            'Objective-C',
+            'Perl',
+            'PHP',
+            'PL/SQL',
+            'Python',
+            'Ruby',
+            'R言語',
+            'Scala',
+            'SQL',
+            'Swift',
+            'TypeScript',
+            'Unity',
+            'VB.NET',
+            'VB',
+            'VBA',
+            'VC++',
+            'Vuex',
+        ]
+    }
+
     # selenium Chrome設定
     options = ChromeOptions()
     options.add_argument('--headless')
@@ -72,7 +167,13 @@ def make_freelance_start() -> None:
         max_price = re.search(r'最高単価([\d\.]+)万円', text).group(1)
         min_price = re.search(r'最低単価([\d\.]+)万円', text).group(1)
 
-        filepath = DATA_PATH + '/freelance-start/' + skill.replace(' ', '').replace('/', '／') + '.csv'
+        category = 'unknown'
+        for key, val in categories_skills.items():
+            if skill in val:
+                category = key
+                break
+
+        filepath = DATA_PATH + '/freelance-start/' + category + '/' + skill.replace(' ', '').replace('/', '／') + '.csv'
 
         # CSV作成・追加書き込み
         if not os.path.exists(filepath):
