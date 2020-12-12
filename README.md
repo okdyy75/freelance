@@ -1,6 +1,6 @@
 # freelance
+フリーランス案件集計バッチ＆web  
 https://okdyy75.github.io/freelance-chart/  
-フリーランス案件集計バッチ＆web
 
 1. Github Actionsで月数回バッチを定期実行
 2. 各サイトから案件情報を収集しCSV作成
