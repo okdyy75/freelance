@@ -1,4 +1,5 @@
 # freelance
+https://okdyy75.github.io/freelance-chart/  
 フリーランス案件集計バッチ＆web
 
 1. Github Actionsで月数回バッチを定期実行
