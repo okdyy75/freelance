@@ -6,21 +6,6 @@
 3. CSVを元にGatsbyでビルド。web表示
 4. GitHub Pagesにwebデプロイ
 
-## 使用言語・ツール
-- Python v3.9
-- Gatsby v2.26
-- React v16.12
-- Typescript 4.1
-- Theme UI 0.3
-
-## フリーランス案件サイト
-
-レバテックフリーランス  
-https://freelance.levtech.jp
-
-フリーランススタート  
-https://freelance-start.com
-
 ```
 # 各サイトから集計＆CSV作成
 pipenv run make_csv
@@ -35,6 +20,21 @@ gatsby develop
 npm run deploy
 
 ```
+
+## 使用言語・ツール
+- Python v3.9
+- Gatsby v2.26
+- React v16.12
+- Typescript 4.1
+- Theme UI 0.3
+
+## フリーランス案件サイト
+
+レバテックフリーランス  
+https://freelance.levtech.jp
+
+フリーランススタート  
+https://freelance-start.com
 
 ## ディレクトリ構成
 ```
