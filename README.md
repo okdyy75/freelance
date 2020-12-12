@@ -25,8 +25,8 @@ npm run deploy
 - Python v3.9
 - Gatsby v2.26
 - React v16.12
-- Typescript 4.1
-- Theme UI 0.3
+- Typescript v4.1
+- Theme UI v0.3
 
 ## フリーランス案件サイト
 
