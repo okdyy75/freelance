@@ -25,7 +25,7 @@ class Ranking extends React.Component {
         <Heading mt={5} as="h2" variant="h2">
           月別単価ランキング（2020年11月〜現在）
         </Heading>
-        <Grid columns={2}>
+        <Grid width={340}>
           {this.state.csvDates.map(date => {
             let title = `${date.substr(0, 4)}年${date.substr(4, 2)}月`
             let csvData = _.filter(this.state.csvData, (v, k) => v.created_at === date)
