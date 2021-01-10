@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 1 1,5,10,15,20,25,30 * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup npm
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: npm Install
+      run: |
+        npm --prefix ./frontend ci ./frontend
+
+    - name: Set up
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        cp ./frontend/.env.example ./frontend/.env.production
+        sed -ie 's|PATH_PREFIX=.*|PATH_PREFIX="/freelance-chart"|' ./frontend/.env.production
+
+    - name: Deploy 🚀
+      run: |
+        npm --prefix ./frontend run deploy
