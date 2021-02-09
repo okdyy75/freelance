@@ -64,3 +64,10 @@ https://freelance-start.com
 ## Gatsbyメモ
 - GatsbyのGrapqlはリアルタイムで取得できないので、一度全部取得してから各ページで必要なデータをフィルタリングしていくという思考が必要
 - 画像ファイルもgraphqlで直接指定で取得する必要あり
+
+
+## Pipfileアップデート
+1. pypiでパッケージのバージョンを確認する(https://pypi.org/)
+2. Pipfileを更新
+3. `pipenv install`
+4. `pipenv lock --requirements > requirements.txt`
