@@ -14,10 +14,10 @@ print_graph = "python3 app/print_graph.py"
 python_version = "3.9"
 
 [packages]
-chromedriver-binary = "~=88.0"
-selenium = "~=3.141"
-pandas = "~=1.1"
-matplotlib = "~=3.3"
+selenium = "*"
+pandas = "*"
+matplotlib = "*"
+webdriver-manager = "*"
 
 [dev-packages]
-autopep8 = "~=1.5"
+autopep8 = "*"

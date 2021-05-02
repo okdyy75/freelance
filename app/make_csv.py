@@ -5,10 +5,11 @@ import os
 import re
 import time
 import threading
+from selenium import webdriver
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import chromedriver_binary
+from webdriver_manager.chrome import ChromeDriverManager
 
 """
 共通変数・定数設定
@@ -21,11 +22,13 @@ now = datetime.datetime.today()
 """
 def main() -> None:
 
+    driver_path = ChromeDriverManager().install()
+
     # フリーランススタートからスキル別の案件集計CSV作成
-    thread1 = threading.Thread(target=make_freelance_start)
+    thread1 = threading.Thread(target=make_freelance_start, args=([driver_path]))
 
     # レバテックからスキル別の案件集計CSV作成
-    thread2 = threading.Thread(target=make_levtech)
+    thread2 = threading.Thread(target=make_levtech, args=([driver_path]))
 
     thread1.start()
     thread2.start()
@@ -38,7 +41,7 @@ def main() -> None:
 """
  フリーランススタートからスキル別の案件集計CSV作成
 """
-def make_freelance_start() -> None:
+def make_freelance_start(driver_path) -> None:
 
     categories_skills = {
         'etc': [
@@ -139,7 +142,7 @@ def make_freelance_start() -> None:
     options = ChromeOptions()
     options.add_argument('--headless')
     options.page_load_strategy = 'normal'
-    driver = Chrome(options=options)
+    driver = webdriver.Chrome(driver_path, options=options)
 
     # スキル一覧を取得
     driver.get('https://freelance-start.com')
@@ -159,7 +162,7 @@ def make_freelance_start() -> None:
         else:
             count = len(driver.find_elements_by_css_selector('#job-list .ajax-job-link'))
 
-        text = driver.find_element_by_css_selector('#accordionSentenceHeading').text
+        text = driver.find_element_by_css_selector('#job_sentence_container').text
         text = re.sub(r'\s', '', text)
 
         avg_price = re.search(r'平均単価([\d\.]+)万円', text).group(1)
@@ -193,13 +196,13 @@ def make_freelance_start() -> None:
 """
  レバテックからスキル別の案件集計CSV作成
 """
-def make_levtech() -> None:
+def make_levtech(driver_path) -> None:
 
     # selenium Chrome設定
     options = ChromeOptions()
     options.add_argument('--headless')
     options.page_load_strategy = 'normal'
-    driver = Chrome(options=options)
+    driver = webdriver.Chrome(driver_path, options=options)
 
     # 検索ページからスキル一覧を取得
     driver.get('https://freelance.levtech.jp/project/search/')
