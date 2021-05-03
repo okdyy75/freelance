@@ -62,6 +62,8 @@ def make_freelance_start(driver_path) -> None:
             'CodeDeploy',
             'CodePipeline',
             'SAP',
+            'Fluentd',
+            'Salesforce'
         ],
         'design': [
             'Adobe XD',
