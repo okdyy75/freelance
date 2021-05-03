@@ -2,7 +2,7 @@
 フリーランス案件集計バッチ＆web  
 https://okdyy75.github.io/freelance-chart/  
 
-1. Github Actionsで月数回バッチを定期実行
+1. GitHub Actionsで月数回バッチを定期実行
 2. 各サイトから案件情報を収集しCSV作成
 3. CSVを元にGatsbyでビルド。web表示
 4. GitHub Pagesにwebデプロイ
@@ -26,7 +26,7 @@ npm run deploy
 - Python v3.9
 - Gatsby v2.26
 - React v16.12
-- Typescript v4.1
+- TypeScript v4.1
 - Theme UI v0.3
 
 ## フリーランス案件サイト
@@ -63,11 +63,11 @@ https://freelance-start.com
 
 ## Gatsbyメモ
 - GatsbyのGrapqlはリアルタイムで取得できないので、一度全部取得してから各ページで必要なデータをフィルタリングしていくという思考が必要
-- 画像ファイルもgraphqlで直接指定で取得する必要あり
+- 画像ファイルもgraphqlで直接指定して取得する必要あり
 
 
 ## Pipfileアップデート
-1. pypiでパッケージのバージョンを確認する(https://pypi.org/)
+1. pypiでパッケージのバージョンを確認する（https://pypi.org/）
 2. Pipfileを更新
 3. `pipenv install`
 4. `pipenv lock --requirements > requirements.txt`
