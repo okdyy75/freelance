@@ -4,12 +4,13 @@ import datetime
 import os
 import re
 import time
-import threading
+import traceback
 from selenium import webdriver
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+from concurrent.futures import ThreadPoolExecutor
 
 """
 共通変数・定数設定
@@ -24,18 +25,29 @@ def main() -> None:
 
     driver_path = ChromeDriverManager().install()
 
+    isError = False
+    with ThreadPoolExecutor() as executor:
+        futures = []
     # フリーランススタートからスキル別の案件集計CSV作成
-    thread1 = threading.Thread(target=make_freelance_start, args=([driver_path]))
+        futures.append(executor.submit(make_freelance_start, driver_path))
 
     # レバテックからスキル別の案件集計CSV作成
-    thread2 = threading.Thread(target=make_levtech, args=([driver_path]))
+        futures.append(executor.submit(make_levtech, driver_path))
 
-    thread1.start()
-    thread2.start()
-    thread1.join()
-    thread2.join()
+        for f in futures:
+            try:
+                # 各スレッド内でエラーが発生した場合、同じ例外が送出される。
+                f.result()
+            except Exception as e:
+                isError = True
+                print(traceback.format_exc())
 
-    print('処理が終了しました')
+    if isError:
+        print('処理が異常終了しました')
+        exit(1)
+    else:
+        print('処理が正常終了しました')
+        exit(0)
 
 
 """
