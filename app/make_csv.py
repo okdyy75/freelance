@@ -28,10 +28,10 @@ def main() -> None:
     isError = False
     with ThreadPoolExecutor() as executor:
         futures = []
-    # フリーランススタートからスキル別の案件集計CSV作成
+        # フリーランススタートからスキル別の案件集計CSV作成
         futures.append(executor.submit(make_freelance_start, driver_path))
 
-    # レバテックからスキル別の案件集計CSV作成
+        # レバテックからスキル別の案件集計CSV作成
         futures.append(executor.submit(make_levtech, driver_path))
 
         for f in futures:
@@ -264,8 +264,8 @@ def make_levtech(driver_path) -> None:
     for category_key, category in categories.items():
         for i in range(category['count'] - 1):
             # 検索ページ表示
-            time.sleep(1)  # クロールするので連続リクエストは控える
             driver.get('https://freelance.levtech.jp/project/search/')
+            time.sleep(1)  # クロールするので連続リクエストは控える
 
             # 「言語・スキル」フォーム表示
             driver.find_elements_by_css_selector('.conditionGroup__btn')[1].click()
@@ -277,7 +277,6 @@ def make_levtech(driver_path) -> None:
             driver.find_elements_by_css_selector('.modalCategoryDetail__item')[i].click()
 
             # 検索ボタン押下
-            time.sleep(1)  # クロールするので連続リクエストは控える
             current_url = driver.current_url
             driver.find_elements_by_css_selector('#activeCount')[3].submit()
             WebDriverWait(driver, 10).until(EC.url_changes(current_url))
